@@ -32,7 +32,7 @@ dependencies:
   image_picker: ^1.0.7
 
   # Voz (substitui RecognizerIntent)
-  speech_to_text: ^6.5.0
+  speech_to_text: ^7.0.0
 
   # Ícones vetoriais convertidos de VectorDrawable
   flutter_svg: ^2.0.9

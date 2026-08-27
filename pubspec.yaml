@@ -1,0 +1,65 @@
+name: consultor_preco
+description: "Consultor de Preço - scanner de código de barras e busca de preços (Americanas)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+
+  # HTTP / API
+  http: ^1.2.0
+
+  # Banco de dados local (substitui Room)
+  sqflite: ^2.3.0
+  path_provider: ^2.1.0
+
+  # Estado / tema
+  provider: ^6.1.1
+  shared_preferences: ^2.2.2
+
+  # Scanner de código de barras (substitui CameraX + MLKit barcode)
+  mobile_scanner: ^3.5.0
+
+  # Reconhecimento de texto em imagem (substitui MLKit TextRecognition)
+  google_mlkit_text_recognition: ^0.10.0
+
+  # Câmera / galeria
+  image_picker: ^1.0.7
+
+  # Voz (substitui RecognizerIntent)
+  speech_to_text: ^6.5.0
+
+  # Ícones vetoriais convertidos de VectorDrawable
+  flutter_svg: ^2.0.9
+
+  # Imagens de rede (substitui Coil)
+  cached_network_image: ^3.3.1
+
+  # Abrir links
+  url_launcher: ^6.2.4
+
+  # Compartilhar
+  share_plus: ^7.2.1
+
+  # Permissões (câmera no scanner)
+  permission_handler: ^11.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/icons/
+    - assets/images/
+
+  # Mantém os PNGs originais como ícones do app (igual ao nativo)
+  # O launcher é gerado a partir de assets/images/ic_launcher.png

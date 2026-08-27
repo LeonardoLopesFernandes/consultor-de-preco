@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Tema base da aplicação (Flutter desenha a UI; isto evita o flash branco) -->
+    <style name="Theme.App" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#ED0030</item>
+        <item name="colorPrimaryDark">#ED0030</item>
+        <item name="colorAccent">#ED0030</item>
+        <item name="android:statusBarColor">#ED0030</item>
+    </style>
+</resources>

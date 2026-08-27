@@ -1,0 +1,51 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+.wp-cli/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# Flutter/Dart/Pub
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+.flutter-plugins
+pubspec.lock
+
+# Android
+android/local.properties
+android/.gradle/
+android/capture-screens/
+android/key.properties
+android/upload-keystore.jks
+**/*.keystore
+**/*.jks
+# NOTA: gradlew, gradlew.bat e gradle-wrapper.jar DEVEM ser versionados,
+# senão o `flutter build apk` falha no CI por falta do wrapper.
+
+# Native backup (app original, não faz parte do Flutter)
+legacy_native/
+
+# Secretos / CI
+key.properties
+upload-keystore.jks
+*.jks
+
+# Editor
+.vscode/

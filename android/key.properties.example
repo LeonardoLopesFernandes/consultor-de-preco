@@ -1,0 +1,7 @@
+# Exemplo de android/key.properties (NÃO COMITE ESTE ARQUIVO - está no .gitignore)
+# Preencha com a mesma senha usada no keytool e rode o build localmente, ou
+# deixe o CI preencher a partir dos GitHub Encrypted Secrets.
+storeFile=upload-keystore.jks
+storePassword=SUA_SENHA
+keyAlias=upload
+keyPassword=SUA_SENHA

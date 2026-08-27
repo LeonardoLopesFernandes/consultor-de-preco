@@ -738,10 +738,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             AppIcons.asset(AppIcons.exit, size: 60, color: const Color(0xFFED0030)),
             const SizedBox(height: 16),
-            const Text('Sair do App',
+            const Text('Sair do aplicativo',
                 style: TextStyle(color: Color(0xFFED0030), fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(height: 12),
-            const Text('Tem certeza que deseja sair?',
+            const Text('O aplicativo será encerrado. Tem certeza que deseja sair?',
                 style: TextStyle(color: Color(0xFF666666)),
                 textAlign: TextAlign.center),
             const SizedBox(height: 20),
@@ -749,7 +749,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF999999)),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF999999),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
                     onPressed: () => Navigator.pop(context),
                     child: const Text('Cancelar', style: TextStyle(color: Colors.white)),
                   ),
@@ -757,8 +760,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFED0030)),
-                    onPressed: () => SystemNavigator.pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFED0030),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                      SystemNavigator.pop();
+                    },
                     child: const Text('Sair', style: TextStyle(color: Colors.white)),
                   ),
                 ),
@@ -829,70 +838,61 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       backgroundColor: isDark ? const Color(0xFF121212) : const Color(0xFFF5F5F5),
       drawer: _buildDrawer(textPrimary, textSecondary),
-      body: Column(
+      appBar: _buildAppBar(),
+      body: ListView(
+        controller: _scrollController,
+        padding: const EdgeInsets.all(16),
         children: [
-          _buildToolbar(isDark),
-          Expanded(
-            child: ListView(
-              controller: _scrollController,
-              padding: const EdgeInsets.all(16),
+          _buildSearchCard(),
+          _buildCameraCard(),
+          if (_loading) _buildLoading(),
+          if (_resultCardVisible)
+            _buildResultCard(surface, textPrimary, textSecondary),
+          if (!_resultCardVisible && !_loading)
+            _buildResultTextCard(surface, textPrimary),
+          if (_historyVisible) ...[
+            const SizedBox(height: 16),
+            Row(
               children: [
-                _buildSearchCard(),
-                _buildCameraCard(),
-                if (_loading)
-                  _buildLoading(),
-                if (_resultCardVisible)
-                  _buildResultCard(surface, textPrimary, textSecondary),
-                if (!_resultCardVisible && !_loading)
-                  _buildResultTextCard(surface, textPrimary),
-                if (_historyVisible) ...[
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      const Expanded(
-                        child: Text('Últimas consultas',
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                      ),
-                      TextButton(
-                        onPressed: _clearHistory,
-                        child: const Text('Limpar', style: TextStyle(color: Color(0xFFED0030))),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  ..._history.map(_buildHistoryItem),
-                ],
+                const Expanded(
+                  child: Text('Últimas consultas',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                ),
+                TextButton(
+                  onPressed: _clearHistory,
+                  child: const Text('Limpar', style: TextStyle(color: Color(0xFFED0030))),
+                ),
               ],
             ),
-          ),
+            const SizedBox(height: 8),
+            ..._history.map(_buildHistoryItem),
+          ],
         ],
       ),
     );
   }
 
-  Widget _buildToolbar(bool isDark) {
-    return Container(
-      height: 100,
-      color: const Color(0xFFED0030),
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Row(
-        children: [
-          GestureDetector(
-            onTap: () => _scaffoldKey.currentState?.openDrawer(),
-            child: AppIcons.asset(AppIcons.menu, size: 32, color: Colors.white),
-          ),
-          const Expanded(
-            child: Center(
-              child: Image(
-                image: AssetImage('assets/images/ic_toolbar_logo.png'),
-                height: 70,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-          const SizedBox(width: 32),
-        ],
+  PreferredSizeWidget _buildAppBar() {
+    return AppBar(
+      backgroundColor: const Color(0xFFED0030),
+      foregroundColor: Colors.white,
+      elevation: 4,
+      toolbarHeight: 72,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+      leading: IconButton(
+        icon: AppIcons.asset(AppIcons.menu, size: 28, color: Colors.white),
+        onPressed: () => _scaffoldKey.currentState?.openDrawer(),
       ),
+      title: Image.asset('assets/images/ic_toolbar_logo.png',
+          height: 56, fit: BoxFit.contain),
+      centerTitle: true,
+      actions: [
+        IconButton(
+          icon: AppIcons.asset(AppIcons.exit, size: 26, color: Colors.white),
+          tooltip: 'Sair do app',
+          onPressed: _showExitDialog,
+        ),
+      ],
     );
   }
 

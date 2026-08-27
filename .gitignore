@@ -35,6 +35,8 @@ android/capture-screens/
 android/key.properties
 android/upload-keystore.jks
 /android/app/build/
+/android/build/
+/android/app/.cxx/
 **/*.keystore
 **/*.jks
 *.apk

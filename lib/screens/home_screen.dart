@@ -35,6 +35,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _etBarcode = TextEditingController();
+  final _barcodeFocusNode = FocusNode();
   final _scrollController = ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -77,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _etBarcode.dispose();
+    _barcodeFocusNode.dispose();
     _textRecognizer.close();
     super.dispose();
   }
@@ -772,7 +774,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).pop(); // fecha drawer
     switch (id) {
       case 0:
-        _etBarcode.requestFocus();
+        _barcodeFocusNode.requestFocus();
         break;
       case 1:
         _scrollController.animateTo(0, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
@@ -905,6 +907,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             TextField(
               controller: _etBarcode,
+              focusNode: _barcodeFocusNode,
               style: const TextStyle(color: Colors.white),
               decoration: const InputDecoration(
                 hintText: 'Digitar código de barras ou descrição',

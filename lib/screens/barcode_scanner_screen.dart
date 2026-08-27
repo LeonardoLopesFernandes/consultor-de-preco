@@ -23,7 +23,7 @@ class _BarcodeScannerScreenState extends State<BarcodeScannerScreen> {
   void initState() {
     super.initState();
     _controller = MobileScannerController(
-      facing: CameraLensDirection.back,
+      facing: CameraFacing.back,
       detectionSpeed: DetectionSpeed.noDuplicates,
     );
     _requestCamera();

@@ -23,10 +23,10 @@ dependencies:
   shared_preferences: ^2.2.2
 
   # Scanner de código de barras (substitui CameraX + MLKit barcode)
-  mobile_scanner: ^3.5.0
+  mobile_scanner: ^6.0.0
 
   # Reconhecimento de texto em imagem (substitui MLKit TextRecognition)
-  google_mlkit_text_recognition: ^0.10.0
+  google_mlkit_text_recognition: ^0.13.0
 
   # Câmera / galeria
   image_picker: ^1.0.7
@@ -47,7 +47,7 @@ dependencies:
   share_plus: ^7.2.1
 
   # Permissões (câmera no scanner)
-  permission_handler: ^11.1.0
+  permission_handler: ^11.3.1
 
 dev_dependencies:
   flutter_test:

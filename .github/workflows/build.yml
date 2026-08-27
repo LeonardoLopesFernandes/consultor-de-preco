@@ -51,7 +51,19 @@ jobs:
         run: flutter pub get
 
       - name: Build APK (release, arm64-v8a, split-per-abi)
-        run: flutter build apk --release --target-platform android-arm64 --split-per-abi
+        run: |
+          # Flutter as vezes nao relocaliza o APK para build/app/outputs/flutter-apk/.
+          # O Gradle gera em android/app/build/outputs/flutter-apk/; copiamos para o
+          # caminho esperado e falhamos o passo so se o APK realmente nao foi gerado.
+          flutter build apk --release --target-platform android-arm64 --split-per-abi || true
+          APK=$(find android/app/build/outputs -name 'app-arm64-v8a-release.apk' | head -n1)
+          if [ -z "$APK" ]; then
+            echo "::error::APK nao foi gerado pelo Gradle"
+            exit 1
+          fi
+          mkdir -p build/app/outputs/flutter-apk
+          cp "$APK" build/app/outputs/flutter-apk/
+          echo "APK gerado em: $APK"
 
       - name: Create GitHub Release e anexar APK
         uses: softprops/action-gh-release@v2

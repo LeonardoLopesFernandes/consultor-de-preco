@@ -34,8 +34,11 @@ android/.gradle/
 android/capture-screens/
 android/key.properties
 android/upload-keystore.jks
+/android/app/build/
 **/*.keystore
 **/*.jks
+*.apk
+*.aab
 # NOTA: gradlew, gradlew.bat e gradle-wrapper.jar DEVEM ser versionados,
 # senão o `flutter build apk` falha no CI por falta do wrapper.
 
